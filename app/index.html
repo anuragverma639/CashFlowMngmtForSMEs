@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cash Flow Management</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="./app.js"></script>
+  <script src="./buffer.js"></script>
+  <script src="./ipfs.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-primary bg-primary">
+    <h1 class="navbar-brand ">
+      <h1>Cash Flow Management
+        <span style="color:black">SME Platform</span>
+      </h1>
+      <div class="pull-right">
+        <div>
+          <h2>
+            <span id="SME_name" style="padding: 10px;"></span>
+
+          </h2>
+        </div>
+      </div>
+    </h1>
+  </nav>
+
+  <!-- //details of SMEs -->
+
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div class="col col-lg-3">
+          <h4>Balance :
+            <span id="SME_balance"></span>
+          </h4>
+        </div>
+        <div class="col col-lg-3">
+          <h4>Product Inventry :
+            <span id="productInventry"></span>
+          </h4>
+        </div>
+        <div class="col col-lg-3">
+          <h4>Component1 Inventry :
+            <span id="component1_inventry"></span>
+          </h4>
+        </div>
+        <div class="col col-lg-3">
+          <h4>Component2 Inventry :
+            <span id="component2_inventry"></span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Spinner -->
+  <img src="/app/images/Spinner.gif" id="spinner" height="50px" width="50px" hidden >
+
+
+  <!-- Alerts -->
+<div class="container"  >
+  <div class="alert alert-success" hidden id="salesAddedAlert" role="alert">
+    <strong>Sales Data Added Successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="alert alert-success" hidden id="buysAddedAlert" role="alert">
+    <strong>Purchases Data Added Successfully.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+  
+
+<!-- Panels of Sales and Buys -->
+  <div class="container">
+    <div class="col col-lg-6 ">
+
+      <div class="panel panel-info">
+
+        <div class="panel-heading">Product Sales</div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+              <label for="sellQuantity">Quantity</label>
+              <input type="text" class="form-control" id="sellQuantity" name="sellQuantity" placeholder="Number Of Quantity">
+
+            </div>
+            <div class="form-group">
+              <label for="sellPricePerQuantity">Price/Quantity</label>
+              <input type="text" class="form-control" id="sellPricePerQuantity" name="sellPricePerQuantity" placeholder="Price/Quantity">
+            </div>
+            <div class="form-group">
+              <label for="sellDate">Date</label>
+              <input type="date" class="form-control" id="sellDate" name="sellDate" placeholder="Date">
+            </div>
+            <div class="form-group">
+              <label for="sellInvoice">Invoice</label>
+              <div class="input-group">
+                <input type="file" class="form-control" id="sellInvoice" name="sellInvoice" aria-describedby="basic-addon2">
+                <a class="input-group-addon btn btn-primary" onclick="App.uploadSalesInvoice()">Upload</a>
+
+              </div>
+              <br>
+
+              <a id="url" target="_blank">
+                <img id="salesInvoice" height="50px" onerror="this.src='http://www.nosun.co.za/wp-content/themes/sistina2/core/assets/images/no-featured-175.jpg';"
+                  width="50px" alt="Invoice Image...">
+              </a>
+
+
+            </div>
+            <button type="button" onclick="App.addSalesDetails()" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="col col-lg-6 ">
+      <div class="panel panel-danger">
+
+        <div class="panel-heading">Components Purchasing</div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+              <label for="buyQuantity1">Quantity1</label>
+              <input type="text" class="form-control" id="buyQuantity1" name="buyQuantity1" placeholder="Number Of Quantity 1">
+
+            </div>
+            <div class="form-group">
+              <label for="buyPricePerQuantity1">Price/Quantity1</label>
+              <input type="text" class="form-control" id="buyPricePerQuantity1" name="buyPricePerQuantity1" placeholder="Price/Quantity 1">
+            </div>
+            <div class="form-group">
+              <label for="buyQuantity2">Quantity2</label>
+              <input type="text" class="form-control" id="buyQuantity2" name="buyQuantity2" placeholder="Number Of Quantity 2">
+
+            </div>
+            <div class="form-group">
+              <label for="buyPricePerQuantity2">Price/Quantity2</label>
+              <input type="text" class="form-control" id="buyPricePerQuantity2" name="buyPricePerQuantity2" placeholder="Price/Quantity 2">
+            </div>
+            <div class="form-group">
+              <label for="buyDate">Date</label>
+              <input type="date" class="form-control" id="buyDate" name="buyDate" placeholder="Date">
+            </div>
+            <div class="form-group">
+              <label for="buyInvoice">Invoice</label>
+              <div class="input-group">
+                <input type="file" class="form-control" id="buyInvoice" name="buyInvoice" aria-describedby="basic-addon1">
+                <a class="input-group-addon btn btn-primary" onclick="App.uploadPurchaseInvoice()">Upload</a>
+              </div>
+              <br>
+
+              <a id="url" target="_blank">
+                <img id="purchaseInvoice" height="50px" onerror="this.src='http://www.nosun.co.za/wp-content/themes/sistina2/core/assets/images/no-featured-175.jpg';"
+                  width="50px" alt="Invoice image...">
+              </a>
+            </div>
+            <button type="button" onclick="App.addPurchaseDetails()" class="btn btn-danger">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Cash Flow Management</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <script src="./app.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+</head>
+
+<body>
+  <nav class="navbar navbar-primary bg-primary">
+    <h1 class="navbar-brand ">
+      <h1>Cash Flow Management
+        <span style="color:black">Bank Platform</span>
+      </h1>
+      
+    </h1>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="col col-lg-4"></div>
+        <div class="col col-lg-4">
+            <div class="input-group">
+                <input type="text" id="SME_name" name="SME_name" class="form-control" placeholder="SME NAME" aria-label="SME NAME"
+                    aria-describedby="basic_addon2">
+                <a class="btn btn-primary input-group-addon" onclick="App.getSMEDetails()" type="submit" id="basic_addon2">Search Details</a>
+            </div>
+        </div>
+        <div class="col col-lg-4"></div>
+    </div>
+    <br>
+    <br>
+  </nav>
+
+
+  <img src="/app/images/Spinner.gif" id="spinner1" height="50px" width="50px" hidden >
+  
+
+  <div class="row">
+      <div class="col col-lg-4">
+            <div id="curve_chart1"></div>
+      </div>
+      <div class="col col-lg-4">
+            <div id="curve_chart2"></div>
+      </div>
+      <div class="col col-lg-4">
+            <div id="curve_chart3"></div>
+      </div>
+  
+  </div>
+<br>
+<br>
+  <div class="row">
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#a" data-toggle="tab">Products Sale Details</a></li>
+        <li><a href="#b"  data-toggle="tab">Components Purchase Details</a></li>
+        
+     </ul>
+     <br/>
+     <div class="tab-content">
+        <div class="tab-pane active" id="a">
+          <table class="table" id="salesID">
+            <thead>
+              <tr>
+                <th scope="col">SME Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price Per Quantity</th>
+                <th scope="col">Date</th>
+                <th scope="col">Invoice</th>
+                
+              </tr>
+            </thead>
+
+            <tbody >
+             
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="b">
+          <table class="table"  id="buysID">
+            <thead>
+              <tr>
+                <th scope="col">SME Name</th>
+                <th scope="col">Quantity 1</th>
+                <th scope="col">Price Per Quantity 1</th>
+                <th scope="col">Quantity 2</th>
+                <th scope="col">Price Per Quantity 2</th>
+                <th scope="col">Date</th>
+                <th scope="col">Invoice</th>
+                
+              </tr>
+            </thead>
+
+            <tbody >
+              <tr></tr>
+            </tbody>
+          </table>
+        </div>
+        
+     </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
